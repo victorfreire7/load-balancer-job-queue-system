@@ -1,16 +1,16 @@
 import express from 'express';
-import db from './src/config/redis.ts';
+import redis from './src/config/redis.ts';
 const app = express();
 
 app.use(express.json());
 
-await db.connect()
+await redis.connect()
 .then(()=>console.log('connect'));
 
-await db.set('key', 'value')
+await redis.set('key', 'value')
 .then(()=>console.log('set'))
 
-await db.get('key')
+await redis.get('key')
 .then((result)=>console.log(result));
 
 
