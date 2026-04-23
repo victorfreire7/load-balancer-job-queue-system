@@ -1,7 +1,7 @@
 import express from 'express';
-import { faker } from '@faker-js/faker';
-import redis from './src/config/redis.ts';
-import mongodb from './src/config/mongo.ts';
+import redis from './src/api/config/redis.ts';
+import mongodb from './src/api/config/mongo.ts';
+import controller from './src/api/controller/index.ts'
 const app = express();
 
 await mongodb()
@@ -11,6 +11,8 @@ await mongodb()
 
 await redis.connect()
 .then(()=>console.log('redis connect'));
+
+app.get('/', controller.store);
 
 app.listen('8080', () => {
     console.log(`http://127.0.0.1:8080`)
