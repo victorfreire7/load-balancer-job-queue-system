@@ -1,7 +1,7 @@
 import express from 'express';
-import redis from './src/api/config/redis.ts';
-import mongodb from './src/api/config/mongo.ts';
-import controller from './src/api/controller/index.ts'
+import redis from './config/redis.ts';
+import mongodb from './config/mongo.ts';
+import controller from './controller/index.ts'
 const app = express();
 
 await mongodb()
