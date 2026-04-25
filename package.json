@@ -1,14 +1,10 @@
 {
-  "name": "redis",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node src/api/server.ts",
+    "handler1": "node src/handler/handler.one.ts",
+    "handler2": "node src/handler/handler.two.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "type": "module",
   "devDependencies": {
     "@faker-js/faker": "^10.4.0",
