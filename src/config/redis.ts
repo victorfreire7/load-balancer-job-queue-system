@@ -15,8 +15,3 @@ const client = createClient({
 });
 
 export default client;
-
-// TO CONNECT:
-// import redis from '../config/redis.ts';
-// await redis.connect()
-// .then(()=>console.log('redis connect'));
