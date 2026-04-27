@@ -23,7 +23,7 @@ O principal objetivo é experimentar padrões que favorecem alta performance e b
 | 1 Handler | 6.42 s | 6.32 s | 6.36 s |
 | 2 Handler's | 6.32 s | 6.35 s | 6.4 s |
 | 3 Handler's | 6.37 s | 6.3 s | 6.70 s |
-| 4 Handler's | 6.24 s | 5.00 s | 6.19 s|
+| 4 Handler's | 6.24 s | 5.99 s | 6.19 s|
 
 - Redução de tempo = 47.8% mais rápido.
 
@@ -40,56 +40,64 @@ O principal objetivo é experimentar padrões que favorecem alta performance e b
 - Dentro do arquivo 'src/api/controller/index.ts' alterar a váriavel 'handler_numbs' para a quantidade de handler's desejada.
 
 ``` ts
-    const info:string = `${req.body.email} ${req.body.password}`;
-    const handler_numbs = 4; // <-- aqui
+    import redis from '../../config/redis.ts';
+    const handler_numbs: number = 2; // <-- Aqui
 
-    const HANDLE_1 = await redis.lRange("HANDLE_1", 0, -1)
+    type User = {
+    [...]
 ```
 
 - Após realizado, dentro da pasta 'src/handlers' criar um novo arquivo 'handler' com o seguinte código:
 
 ``` ts 
-import mongo_schema from '../api/model/User.ts';
+    import mongo_schema from '../api/model/User.ts';
 
-import mongodb from '../config/mongo.ts';
-import redis from '../config/redis.ts';
+    import mongodb from '../config/mongo.ts';
+    import redis from '../config/redis.ts';
 
-import express from 'express';
-const app: express.Express = express();
-const port: number = 8080;
+    import express from 'express';
+    const app: express.Express = express();
 
-await redis.connect()
-.then(() => console.log('redis connect'));
+    const handler_name: string = 'HANDLE_1';
+    const port: number = 8080;
 
-await mongodb()
-.then(() => console.log(`mongodb connect in port ${port}`));
-
-app.listen(port, async (): Promise<void> => { 
-    while (true) {   
-        let HANDLE_1: string[] | null = await redis.lRange("HANDLE_1", 0, -1) 
-        
-        if(HANDLE_1.length > 0){
-            const user: any = await redis.lmPop( 
-                'HANDLE_1',
-                'RIGHT',
-            ); 
-    
-            const user_split: string[] = user[1][0]?.split(' ');
-            let user_email: any = user_split[0];
-            let user_password: any = user_split[1];
-    
-            await mongo_schema.create({ 
-                email: user_email,
-                password: user_password
-            });
-             // console.log(user_split) // para visualizar a execução do handler
-        } else {
-            continue;
-        }
+    type User = {
+        email: string,
+        password: string
     }
-});
+
+    await redis.connect()
+    .then(() => console.log('redis connect'));
+
+    await mongodb()
+    .then(() => console.log(`mongodb connect in port ${port}`));
+
+    app.listen(port, () => { 
+        setInterval( async (): Promise<void> => {
+            let HANDLE_1: string[] | null = await redis.lRange(handler_name, 0, -1) 
+            
+            if(HANDLE_1.length > 0){
+                const user: any = await redis.lmPop( 
+                    handler_name,
+                    'RIGHT',
+                ); 
+        
+
+                if(user && user[1]){
+                    const user_json: User = JSON.parse(user[1][0]);
+                
+                    console.log(user_json)  
+            
+                    await mongo_schema.create({
+                        email: user_json.email,
+                        password: user_json.password
+                    });
+                }
+            }
+        }, 0);  
+    });
 ```
-- Não esqueça de alterar ```  const port: number = 8080; ``` para uma porta não utilizada e ```const handler_name: string = "HANDLE_1" ``` para uma váriavel nao utilizada anteriormente.
+- Não esqueça de alterar ```  const port: number = 8080; ``` para uma porta não utilizada e ```const handler_name: string = "HANDLE_1" ``` com "1" respectivo ao número do handler.
 ---
 ## Executando o Projeto
  
