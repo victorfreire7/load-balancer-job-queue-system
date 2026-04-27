@@ -1,11 +1,5 @@
 # Load Balancer 
 
-![](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white) 
-
-![](https://img.shields.io/badge/Redis-FF4438.svg?style=for-the-badge&logo=Redis&logoColor=white) ![](https://img.shields.io/badge/MongoDB-47A248.svg?style=for-the-badge&logo=MongoDB&logoColor=white)
-
-![](https://img.shields.io/badge/Mongoose-F04D35.svg?style=for-the-badge&logo=Mongoose&logoColor=white) ![](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white)
-
 ## Sobre o projeto
 
 Este projeto foi desenvolvido com fins de estudo, com foco em aprofundar o entendimento sobre arquiteturas de sistemas distribuídos e bancos de dados não relacionais.
