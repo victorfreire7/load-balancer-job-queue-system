@@ -12,7 +12,7 @@ const store = async (req: any, res: any) => {
             const email = faker.internet.email();
             const password = faker.internet.password();
             const info:any = `${email} ${password}`;
-            const rand: number = random_num(1, 4)
+            const rand: number = random_num(0.6, 4.49)
     
             let handle:string | any = `HANDLE_${rand}`;
       
