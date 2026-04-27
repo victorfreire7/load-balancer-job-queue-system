@@ -3,6 +3,8 @@ import redis from '../config/redis.ts';
 import controller from './controller/index.ts'
 const app = express();
 
+app.use(express.json());
+
 await redis.connect()
 .then(()=>console.log('redis connect'));
 

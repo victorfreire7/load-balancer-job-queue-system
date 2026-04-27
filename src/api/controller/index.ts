@@ -1,11 +1,8 @@
 import redis from '../../config/redis.ts';
-import { faker } from '@faker-js/faker';
 
 const store = async (req: any, res: any) => {
     try {
-        const email = faker.internet.email();
-        const password = faker.internet.password();
-        const info:any = `${email} ${password}`;
+        const info:string = `${req.body.email} ${req.body.password}`;
 
         const HANDLE_1 = await redis.lRange("HANDLE_1", 0, -1) // RETORNO = ARRAY
         const HANDLE_2 = await redis.lRange("HANDLE_2", 0, -1) // RETORNO = ARRAY
@@ -24,8 +21,8 @@ const store = async (req: any, res: any) => {
 
         res.json({
             "HANDLE": handle,
-            "EMAIL": email, 
-            "PASSWORD": password
+            "EMAIL": req.body.email, 
+            "PASSWORD": req.body.password
         })
 
     } catch (error) {
