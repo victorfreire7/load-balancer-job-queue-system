@@ -5,6 +5,8 @@ import redis from '../config/redis.ts';
 
 import express from 'express';
 const app: express.Express = express();
+
+const handler_name: string = 'HANDLE_4' 
 const port: number = 8083;
 
 await redis.connect()
@@ -15,11 +17,11 @@ await mongodb()
 
 app.listen(port, async (): Promise<void> => { 
     while (true) {   
-        let HANDLE_4: string[] | null = await redis.lRange("HANDLE_4", 0, -1) // RETORNO = ARRAY
+        let HANDLE_4: string[] | null = await redis.lRange(handler_name, 0, -1) // RETORNO = ARRAY
         
         if(HANDLE_4.length > 0){
             const user: any = await redis.lmPop( // LRANGE HANDLE_4 0 -1
-                'HANDLE_4',
+                handler_name,
                 'RIGHT',
             ); // retorno: [ 'HANDLE_4', [ 'Katrina.Grady29@gmail.com G9KHj1MpR4aaEto' ] ]
     

@@ -1,6 +1,6 @@
 import redis from '../../config/redis.ts';
 import { faker } from '@faker-js/faker';
-let i = 0
+let i = 0;
 
 const random_num = (min : number, max : number) => {
     return Math.round(Math.random() * (max - min) + min);
