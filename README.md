@@ -19,7 +19,7 @@ O principal objetivo é experimentar padrões que favorecem alta performance e b
 
 | Qtd. Handler's | 1º Teste | 2º Teste | 3º Teste |
 |--------------|----------|----------|----------|
-| Sem Load-Balancer | 6.82 s | 6.75 s | 7.1 s |
+| Sem Load-Balancer | 10.5 s | 11.4 s | 11.2 s |
 | 2 Handler's | 6.82 s | 6.75 s | 7.1 s |
 | 3 Handler's | 6.9 s | 6.72 s | 6.70 s |
 | 4 Handler's | 6.62 s | 6.56 s | 6.56 s|
