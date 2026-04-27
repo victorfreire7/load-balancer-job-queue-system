@@ -24,6 +24,8 @@ O principal objetivo é experimentar padrões que favorecem alta performance e b
 | 3 Handler's | 6.9 s | 6.72 s | 6.70 s |
 | 4 Handler's | 6.62 s | 6.56 s | 6.56 s|
 
+- Redução de tempo = 42.5% mais rápido.
+
 ---
 ## Execution Flow
 
@@ -93,6 +95,8 @@ app.listen(port, async (): Promise<void> => {
 1. Realizar o clone desse repositório:
 ```bash
     git clone https://github.com/victorfreire7/job-queue-system.git
+
+    cd job-queue-system
 ```
 
 2. Preencher as variáveis de ambiente:
