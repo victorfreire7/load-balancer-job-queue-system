@@ -12,7 +12,6 @@ const rand_numb = (min: number, max: number): number => {
 
 const store = async (req: any, res: any) => {
     try {
-        // const info:string = `${req.body.email} ${req.body.password}`;
         const user: User = { email: req.body.email, password: req.body.password }
         const rand: number = rand_numb(0.59, handler_numbs + 0.49)
 
