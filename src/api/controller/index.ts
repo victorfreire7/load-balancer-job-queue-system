@@ -7,7 +7,7 @@ const rand_numb = (min: number, max: number): number => {
     return Math.round(Math.random() * (max - min) + min);
 }
 
-const store = async (req: typeof request, res: typeof response) => {
+const store = async (req: typeof request, res: typeof response) : Promise<void> => {
     try {
         const user: { email:string,  password:string} = { email: req.body.email, password: req.body.password }
         const rand: number = rand_numb(0.59, handler_numbs + 0.49)
